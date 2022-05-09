@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock paper scissors</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        button{
+            padding: 3px 2px;
+            background-color: brown;
+            color: white;
+            border-radius: 4px;
+            margin: 0 10px;
+            margin-top: 5vh;
+            box-shadow: 2px 2px 10px yellow;
+        }
+        body{
+            background-color: green;
+        }
+        h2{
+            border: 2px solid yellow;
+            margin: 10vh;
+            width: 70vw;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="game">
+        <h2>computers choice: <span id="computer"></span></h2>
+        <h2>user choice: <span id="user"></span></h2>
+        <h2>result: <span id="result"></span></h2>
+    </div>
+    <div class="btns">
+    <button id="rock">rock</button>
+    <button id="paper">paper</button>
+    <button id="scissors">scissors</button>
+</div>
+    </div>
+    <div class="won">
+        <h1>won</h1>
+    </div>
+    <script>
+        const compChoice = document.getElementById('computer');
+        const userChoice = document.getElementById('user');
+        const displayResult = document.getElementById('result');
+        const choices = document.querySelectorAll('button');
+        let usersChoice;
+        let cpuChoice;
+        let result;
+        let won = document.querySelector('.won');
+
+        choices.forEach((choice)=>{
+            choice.addEventListener('click', (e)=>{
+                usersChoice = e.target.id;
+                userChoice.innerHTML = usersChoice;
+                userChoice.style.color="brown"
+                computerChoice();
+                gameResult();
+            })
+        })
+
+        const computerChoice = () =>{
+            const ranNum = Math.floor(Math.random() *3 )+1;
+
+            if(ranNum===1){
+                cpuChoice="rock";
+            }
+            if(ranNum===2){
+                cpuChoice="paper";
+            }
+            if(ranNum===3){
+                cpuChoice="scissors";
+            }
+            compChoice.innerHTML=cpuChoice;
+            compChoice.style.color="blue"
+        }
+
+        const gameResult = ()=>{
+            if(cpuChoice===usersChoice){
+                result="its a draw!"
+            }
+            if(cpuChoice==="rock" && usersChoice==="paper"){
+                result="you won!"
+            }
+            if(cpuChoice==="rock" && usersChoice==="scissors"){
+                result="you lost!"
+            }
+            if(cpuChoice==="paper" && usersChoice==="rock"){
+                result="you lost!"
+            }
+            if(cpuChoice==="paper" && usersChoice==="scissors"){
+                result="you won!"
+            }
+            if(cpuChoice==="scissors" && usersChoice==="paper"){
+                result="you lost!"
+            }
+            if(cpuChoice==="scissors" && usersChoice==="rock"){
+                result="you won!"
+            }
+            displayResult.innerHTML=result;
+            displayResult.style.color="red";
+        }
+    </script>
+
+</body>
+</html>
